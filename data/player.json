@@ -1,0 +1,36 @@
+{
+  "name": "无名修士",
+  "realm": "炼气期一层",
+  "hp": 100,
+  "spiritual_energy": 100,
+  "artifacts": [],
+  "skills": [],
+  "fate": "普通",
+  "side_effects": [],
+  "inventory": [],
+  "attributes": {
+    "strength": 10,
+    "intelligence": 10,
+    "agility": 10,
+    "luck": 5
+  },
+  "history": [
+    {
+      "timestamp": "2025-05-26T16:56:24.110232",
+      "action": "在'血月异象'事件中，选择了：抓住机会强行突破",
+      "result": {
+        "成功": false,
+        "描述": "```json\n{\n    \"成功\": true,\n    \"描述\": \"血色月光下，无名修士周身灵气狂暴翻涌，经脉几欲崩裂。就在肉身即将崩溃之际，逆转命格突然触发，血色灵气化为万千丝线重塑经脉。伴随着骨骼爆响，周身毛孔排出黑色杂质，成功突破至炼气期二层。\",\n    \"建议\": \"立即隐匿气息，三只血瞳妖狼已循着破境波动袭来\",\n    \"状态变化\": {\n        \"hp\": +20,\n",
+        "建议": "请重新尝试",
+        "状态变化": {
+          "hp": 0,
+          "spiritual_energy": 0,
+          "new_items": [],
+          "new_skills": [],
+          "realm_change": null
+        }
+      }
+    }
+  ],
+  "current_event": null
+}

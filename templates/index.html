@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>玄幻修仙文字游戏</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #1e0f2d 0%, #2d1810 100%);
+            color: #e0d5c7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            gap: 20px;
+        }
+
+        /* 左侧状态面板 */
+        .status-panel {
+            width: 300px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid #8b6914;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(139, 105, 20, 0.3);
+        }
+
+        .status-panel h2 {
+            color: #ffd700;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 24px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .status-item {
+            margin: 10px 0;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+            border-left: 3px solid #8b6914;
+        }
+
+        .status-label {
+            color: #b8860b;
+            font-weight: bold;
+        }
+
+        .progress-bar {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            height: 20px;
+            margin-top: 5px;
+            overflow: hidden;
+            border: 1px solid #8b6914;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #8b0000, #ff4500);
+            transition: width 0.3s ease;
+        }
+
+        .progress-fill.energy {
+            background: linear-gradient(90deg, #1e90ff, #00bfff);
+        }
+
+        /* 主游戏区域 */
+        .game-area {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid #8b6914;
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .game-title {
+            text-align: center;
+            font-size: 36px;
+            color: #ffd700;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+        }
+
+        /* 事件显示区 */
+        .event-display {
+            background: rgba(139, 105, 20, 0.1);
+            border: 1px solid #8b6914;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            min-height: 100px;
+            display: none;
+        }
+
+        .event-display.active {
+            display: block;
+        }
+
+        .event-title {
+            color: #ffd700;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .event-description {
+            line-height: 1.6;
+            color: #e0d5c7;
+        }
+
+        /* 选择按钮 */
+        .choices-container {
+            display: none;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .choices-container.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .choice-btn {
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #8b6914, #b8860b);
+            border: 2px solid #ffd700;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .choice-btn:hover {
+            background: linear-gradient(135deg, #b8860b, #ffd700);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        /* 历史记录区 */
+        .history-area {
+            flex: 1;
+            overflow-y: auto;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .history-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+            border-left: 3px solid #8b6914;
+        }
+
+        .history-action {
+            color: #ffd700;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .history-result {
+            color: #e0d5c7;
+            line-height: 1.5;
+        }
+
+        .history-success {
+            color: #90ee90;
+        }
+
+        .history-failure {
+            color: #ff6b6b;
+        }
+
+        /* 输入区域 */
+        .input-area {
+            display: flex;
+            gap: 10px;
+        }
+
+        #action-input {
+            flex: 1;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid #8b6914;
+            border-radius: 5px;
+            color: #e0d5c7;
+            font-size: 16px;
+        }
+
+        #action-input::placeholder {
+            color: #999;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #8b6914, #b8860b);
+            border: 2px solid #ffd700;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #b8860b, #ffd700);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #4a4a4a, #666);
+            border-color: #888;
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #666, #888);
+        }
+
+        /* 控制按钮组 */
+        .control-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        /* 滚动条美化 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #8b6914;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #b8860b;
+        }
+
+        /* 动画效果 */
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); }
+            100% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.5); }
+        }
+
+        .glow {
+            animation: glow 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 左侧状态面板 -->
+        <div class="status-panel">
+            <h2>修士状态</h2>
+            <div class="status-item">
+                <span class="status-label">姓名：</span>
+                <span id="player-name">无名修士</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">境界：</span>
+                <span id="player-realm">炼气期一层</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">生命值：</span>
+                <span id="hp-text">100/100</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="hp-bar" style="width: 100%"></div>
+                </div>
+            </div>
+            <div class="status-item">
+                <span class="status-label">灵气值：</span>
+                <span id="energy-text">100/100</span>
+                <div class="progress-bar">
+                    <div class="progress-fill energy" id="energy-bar" style="width: 100%"></div>
+                </div>
+            </div>
+            <div class="status-item">
+                <span class="status-label">命格：</span>
+                <span id="player-fate">普通</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">法宝：</span>
+                <div id="player-artifacts">无</div>
+            </div>
+            <div class="status-item">
+                <span class="status-label">技能：</span>
+                <div id="player-skills">无</div>
+            </div>
+            <div class="status-item">
+                <span class="status-label">副作用：</span>
+                <div id="player-effects">无</div>
+            </div>
+        </div>
+
+        <!-- 主游戏区域 -->
+        <div class="game-area">
+            <h1 class="game-title">玄幻修仙世界</h1>
+
+            <!-- 控制按钮 -->
+            <div class="control-buttons">
+                <button class="btn" onclick="getRandomEvent()">触发随机事件</button>
+                <button class="btn btn-secondary" onclick="resetGame()">重置游戏</button>
+            </div>
+
+            <!-- 事件显示区 -->
+            <div class="event-display" id="event-display">
+                <div class="event-title" id="event-title"></div>
+                <div class="event-description" id="event-description"></div>
+                <div class="choices-container" id="choices-container"></div>
+            </div>
+
+            <!-- 历史记录 -->
+            <div class="history-area" id="history-area">
+                <div style="text-align: center; color: #999;">
+                    暂无历史记录，开始你的修仙之旅吧！
+                </div>
+            </div>
+
+            <!-- 输入区域 -->
+            <div class="input-area">
+                <input
+                    type="text"
+                    id="action-input"
+                    placeholder="输入你的行动（如：我要去山洞探险）"
+                    onkeypress="if(event.key==='Enter') submitAction()"
+                >
+                <button class="btn glow" onclick="submitAction()">执行行动</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 全局变量
+        let currentPlayer = null;
+        let historyItems = [];
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            loadPlayerStatus();
+        });
+
+        // 加载玩家状态
+        async function loadPlayerStatus() {
+            try {
+                const response = await fetch('/api/player');
+                const player = await response.json();
+                currentPlayer = player;
+                updateStatusDisplay(player);
+                updateHistoryDisplay(player.history || []);
+            } catch (error) {
+                console.error('加载玩家状态失败:', error);
+            }
+        }
+
+        // 更新状态显示
+        function updateStatusDisplay(player) {
+            document.getElementById('player-name').textContent = player.name;
+            document.getElementById('player-realm').textContent = player.realm;
+            document.getElementById('hp-text').textContent = `${player.hp}/100`;
+            document.getElementById('hp-bar').style.width = `${player.hp}%`;
+            document.getElementById('energy-text').textContent = `${player.spiritual_energy}/100`;
+            document.getElementById('energy-bar').style.width = `${player.spiritual_energy}%`;
+            document.getElementById('player-fate').textContent = player.fate;
+            document.getElementById('player-artifacts').textContent = player.artifacts.length > 0 ? player.artifacts.join(', ') : '无';
+            document.getElementById('player-skills').textContent = player.skills.length > 0 ? player.skills.join(', ') : '无';
+            document.getElementById('player-effects').textContent = player.side_effects.length > 0 ? player.side_effects.join(', ') : '无';
+        }
+
+        // 更新历史显示
+        function updateHistoryDisplay(history) {
+            const historyArea = document.getElementById('history-area');
+            if (history.length === 0) {
+                historyArea.innerHTML = '<div style="text-align: center; color: #999;">暂无历史记录，开始你的修仙之旅吧！</div>';
+                return;
+            }
+
+            historyArea.innerHTML = '';
+            history.slice(-10).reverse().forEach(item => {
+                const historyDiv = document.createElement('div');
+                historyDiv.className = 'history-item';
+
+                const actionDiv = document.createElement('div');
+                actionDiv.className = 'history-action';
+                actionDiv.textContent = `行动：${item.action}`;
+
+                const resultDiv = document.createElement('div');
+                resultDiv.className = `history-result ${item.result.成功 ? 'history-success' : 'history-failure'}`;
+                resultDiv.innerHTML = `
+                    <div>结果：${item.result.成功 ? '成功' : '失败'}</div>
+                    <div>${item.result.描述}</div>
+                    <div style="color: #b8860b; margin-top: 5px;">建议：${item.result.建议}</div>
+                `;
+
+                historyDiv.appendChild(actionDiv);
+                historyDiv.appendChild(resultDiv);
+                historyArea.appendChild(historyDiv);
+            });
+
+            // 自动滚动到底部
+            historyArea.scrollTop = historyArea.scrollHeight;
+        }
+
+        // 提交行动
+        async function submitAction() {
+            const input = document.getElementById('action-input');
+            const action = input.value.trim();
+
+            if (!action) {
+                alert('请输入你的行动！');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/action', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ action: action })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    currentPlayer = data.player;
+                    updateStatusDisplay(data.player);
+                    updateHistoryDisplay(data.player.history);
+                    input.value = '';
+
+                    // 清除事件显示
+                    hideEvent();
+                } else {
+                    alert(data.error || '行动失败');
+                }
+            } catch (error) {
+                console.error('提交行动失败:', error);
+                alert('系统错误，请稍后重试');
+            }
+        }
+
+        // 获取随机事件
+        async function getRandomEvent() {
+            try {
+                const response = await fetch('/api/event');
+                const event = await response.json();
+
+                if (response.ok) {
+                    displayEvent(event);
+                } else {
+                    alert('获取事件失败');
+                }
+            } catch (error) {
+                console.error('获取事件失败:', error);
+                alert('系统错误，请稍后重试');
+            }
+        }
+
+        // 显示事件
+        function displayEvent(event) {
+            const eventDisplay = document.getElementById('event-display');
+            const eventTitle = document.getElementById('event-title');
+            const eventDescription = document.getElementById('event-description');
+            const choicesContainer = document.getElementById('choices-container');
+
+            eventTitle.textContent = event.name;
+            eventDescription.textContent = event.description;
+
+            // 清空并添加选择按钮
+            choicesContainer.innerHTML = '';
+            event.choices.forEach((choice, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'choice-btn';
+                btn.textContent = choice.text;
+                btn.onclick = () => makeChoice(index);
+                choicesContainer.appendChild(btn);
+            });
+
+            eventDisplay.classList.add('active');
+            choicesContainer.classList.add('active');
+
+            // 禁用普通输入
+            document.getElementById('action-input').disabled = true;
+        }
+
+        // 隐藏事件
+        function hideEvent() {
+            document.getElementById('event-display').classList.remove('active');
+            document.getElementById('choices-container').classList.remove('active');
+            document.getElementById('action-input').disabled = false;
+        }
+
+        // 做出选择
+        async function makeChoice(choiceIndex) {
+            try {
+                const response = await fetch('/api/choice', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ choice_index: choiceIndex })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    currentPlayer = data.player;
+                    updateStatusDisplay(data.player);
+                    updateHistoryDisplay(data.player.history);
+                    hideEvent();
+                } else {
+                    alert(data.error || '选择失败');
+                }
+            } catch (error) {
+                console.error('提交选择失败:', error);
+                alert('系统错误，请稍后重试');
+            }
+        }
+
+        // 重置游戏
+        async function resetGame() {
+            if (!confirm('确定要重置游戏吗？所有进度将会丢失！')) {
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/reset', {
+                    method: 'POST'
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    currentPlayer = data.player;
+                    updateStatusDisplay(data.player);
+                    updateHistoryDisplay([]);
+                    hideEvent();
+                    alert('游戏已重置！');
+                }
+            } catch (error) {
+                console.error('重置游戏失败:', error);
+                alert('重置失败，请稍后重试');
+            }
+        }
+    </script>
+</body>
+</html>

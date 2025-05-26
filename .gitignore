@@ -1,0 +1,15 @@
+# 忽略敏感环境变量
+.env
+
+# Python常规忽略项
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.idea/
+.DS_Store
+*.sqlite3
+

@@ -1,0 +1,168 @@
+{
+  "world_info": {
+    "name": "玄幻修真界",
+    "description": "黑暗残酷的修真世界，天道冷酷，强者为尊，不强调传统善恶",
+    "core_principles": [
+      "弱肉强食，适者生存",
+      "资源有限，竞争激烈",
+      "善恶非绝对标准，以生存、利益与成长为主要驱动",
+      "天道不仁，以万物为刍狗"
+    ],
+    "philosophy": {
+      "main_quote": "世无善恶，唯看谁执笔书写",
+      "secondary_quote": "他人之痛，乃吾之养料；旁人之死，乃吾之资粮"
+    }
+  },
+  "planes": {
+    "mortal_realm": {
+      "name": "凡界",
+      "energy": "灵气",
+      "description": "灵气为主，修炼难度高但入门广泛",
+      "max_realm": "渡劫期"
+    },
+    "immortal_realm": {
+      "name": "仙界",
+      "energy": "仙气",
+      "description": "仙气主导，法则稳定但监管严格，有天劫压制",
+      "max_realm": "仙帝"
+    },
+    "divine_realm": {
+      "name": "神界",
+      "energy": "本源之力/信仰之力",
+      "description": "法则高度复杂，能量密度极高，极端危险",
+      "max_realm": "神王"
+    }
+  },
+  "cultivation_realms": [
+    {
+      "name": "炼气期",
+      "levels": 9,
+      "description": "引气入体，初步感应天地灵气",
+      "breakthrough_requirement": "灵气积累达到饱和"
+    },
+    {
+      "name": "筑基期",
+      "levels": 9,
+      "description": "构筑道基，稳固修为根基",
+      "breakthrough_requirement": "道基稳固，心境圆满"
+    },
+    {
+      "name": "金丹期",
+      "levels": 9,
+      "description": "凝结金丹，初步掌握法则之力",
+      "breakthrough_requirement": "金丹九转，引动雷劫"
+    },
+    {
+      "name": "元婴期",
+      "levels": 9,
+      "description": "金丹化婴，神识大增",
+      "breakthrough_requirement": "元婴出窍，渡心魔劫"
+    },
+    {
+      "name": "化神期",
+      "levels": 9,
+      "description": "元婴化神，初步接触法则",
+      "breakthrough_requirement": "神魂合一，明悟本我"
+    },
+    {
+      "name": "合体期",
+      "levels": 9,
+      "description": "人法合一，掌控一定法则",
+      "breakthrough_requirement": "法则融合，天人合一"
+    },
+    {
+      "name": "渡劫期",
+      "levels": 9,
+      "description": "准备飞升，对抗天道",
+      "breakthrough_requirement": "九九天劫，逆天改命"
+    },
+    {
+      "name": "大乘期",
+      "levels": 9,
+      "description": "超脱凡俗，随时可飞升",
+      "breakthrough_requirement": "撕裂空间，破界飞升"
+    }
+  ],
+  "special_systems": {
+    "side_effect_reversal": {
+      "name": "副作用逆转系统",
+      "description": "主角特有能力，能将所有副作用转化为正向效果",
+      "examples": [
+        {
+          "original": "损根之药导致根基受损",
+          "reversed": "强化根基"
+        },
+        {
+          "original": "灼魂之火烧伤神识",
+          "reversed": "强化灵识"
+        },
+        {
+          "original": "雷劫伤害",
+          "reversed": "淬炼肉身与神魂"
+        }
+      ]
+    }
+  },
+  "fate_system": {
+    "types": [
+      {
+        "name": "普通",
+        "description": "无特殊加成，平凡之命",
+        "luck_modifier": 0,
+        "special_effect": "无"
+      },
+      {
+        "name": "福星",
+        "description": "福缘深厚，易遇机缘",
+        "luck_modifier": 20,
+        "special_effect": "获得宝物概率+30%"
+      },
+      {
+        "name": "煞星",
+        "description": "杀伐果断，战斗天赋出众",
+        "luck_modifier": -10,
+        "special_effect": "战斗力+20%，但易招惹是非"
+      },
+      {
+        "name": "天骄",
+        "description": "天赋异禀，修炼速度极快",
+        "luck_modifier": 10,
+        "special_effect": "修炼速度+50%，突破成功率+20%"
+      },
+      {
+        "name": "天煞孤星",
+        "description": "命格特异，亲人易遭劫难",
+        "luck_modifier": -20,
+        "special_effect": "副作用逆转效果+100%，但社交困难"
+      }
+    ]
+  },
+  "twenty_laws": [
+    "轮回", "因果", "元素", "时空", "生命",
+    "毁灭", "创生", "灵魂", "契约", "命运",
+    "心念", "自然", "光明", "黑暗", "梦境",
+    "智慧", "情感", "力量", "秩序", "虚空"
+  ],
+  "law_rarity": {
+    "common": ["元素", "情感", "力量", "自然"],
+    "rare": ["光明", "黑暗", "契约", "智慧"],
+    "epic": ["梦境", "心念", "秩序", "命运", "毁灭"],
+    "legendary": ["虚空", "因果", "轮回", "创生"]
+  },
+  "action_judgment": {
+    "base_success_rate": 50,
+    "modifiers": {
+      "realm_advantage_per_level": 10,
+      "realm_disadvantage_per_level": -15,
+      "equipment_match": 20,
+      "environment_factor": 15,
+      "luck_factor_multiplier": 2,
+      "intelligence_bonus_for_strategy": 1.5
+    },
+    "special_rules": {
+      "desperate_burst": "生命值低于20%时，战力提升50%",
+      "越级挑战": "挑战高出3个小境界以上的敌人，失败也能获得感悟",
+      "副作用保底": "主角行动最低成功率20%"
+    }
+  }
+}

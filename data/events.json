@@ -1,0 +1,137 @@
+{
+  "random_events": [
+    {
+      "id": "ancient_cave_discovery",
+      "name": "古洞遗迹",
+      "description": "你在山脉深处发现一个散发着微弱灵光的洞穴，洞口刻着古老的符文，隐约能感受到其中蕴含的灵气波动。但洞内深处传来阵阵寒意，似有某种危险潜伏。",
+      "choices": [
+        {
+          "text": "小心探查洞口符文",
+          "action": "study_runes"
+        },
+        {
+          "text": "直接进入洞穴探险",
+          "action": "enter_directly"
+        },
+        {
+          "text": "先在外围布置阵法",
+          "action": "setup_formation"
+        }
+      ]
+    },
+    {
+      "id": "demonic_beast_encounter",
+      "name": "妖兽袭击",
+      "description": "一只筑基期的赤炎虎突然从密林中窜出，双目赤红，獠牙滴血。它似乎刚经历了一场恶战，身上有多处伤痕，但凶性不减。你能感受到它内丹中蕴含的精纯火属性灵力。",
+      "choices": [
+        {
+          "text": "燃烧精血，全力一战",
+          "action": "fight_desperately"
+        },
+        {
+          "text": "投出诱饵，趁机逃遁",
+          "action": "distract_escape"
+        },
+        {
+          "text": "尝试以灵识安抚",
+          "action": "spiritual_pacify"
+        }
+      ]
+    },
+    {
+      "id": "mysterious_merchant",
+      "name": "游方商人",
+      "description": "一位身披灰袍的神秘商人出现在你面前，他的修为深不可测，储物袋上闪烁着空间法则的波动。'小友，老夫这里有些好东西，或许对你有用。'他露出意味深长的笑容。",
+      "choices": [
+        {
+          "text": "查看他的商品",
+          "action": "check_goods"
+        },
+        {
+          "text": "试探其真实身份",
+          "action": "probe_identity"
+        },
+        {
+          "text": "婉拒并快速离开",
+          "action": "polite_leave"
+        }
+      ]
+    },
+    {
+      "id": "blood_moon_phenomenon",
+      "name": "血月异象",
+      "description": "今夜血月当空，天地间弥漫着诡异的血色光芒。你能感受到体内的灵气变得躁动不安，但同时也察觉到这是突破瓶颈的良机。远处传来阵阵兽吼，显然血月也影响了周围的妖兽。",
+      "choices": [
+        {
+          "text": "抓住机会强行突破",
+          "action": "force_breakthrough"
+        },
+        {
+          "text": "布阵防御度过血月",
+          "action": "defensive_formation"
+        },
+        {
+          "text": "外出猎杀狂化妖兽",
+          "action": "hunt_crazed_beasts"
+        }
+      ]
+    },
+    {
+      "id": "inheritance_trial",
+      "name": "传承试炼",
+      "description": "你发现了一座隐藏的试炼之地，石碑上写着：'吾乃虚空道人，留此传承待有缘人。入内者需承担因果，可得吾之虚空法则感悟。'入口处有淡淡的空间波动，显然这是一处独立的秘境空间。",
+      "choices": [
+        {
+          "text": "毅然进入接受试炼",
+          "action": "accept_trial"
+        },
+        {
+          "text": "先调查更多信息",
+          "action": "investigate_more"
+        },
+        {
+          "text": "记下位置待实力更强再来",
+          "action": "mark_location"
+        }
+      ]
+    },
+    {
+      "id": "sect_conflict",
+      "name": "宗门冲突",
+      "description": "你遭遇了玄天宗和血魇教弟子的冲突现场。双方剑拔弩张，灵气激荡。玄天宗弟子朝你喊道：'道友，助我诛魔！'而血魇教修士冷笑：'识相的就滚开，否则连你一起杀！'",
+      "choices": [
+        {
+          "text": "帮助玄天宗弟子",
+          "action": "help_righteous"
+        },
+        {
+          "text": "趁乱偷袭两边",
+          "action": "attack_both"
+        },
+        {
+          "text": "隐身观察等待时机",
+          "action": "hide_observe"
+        }
+      ]
+    },
+    {
+      "id": "poisonous_herb",
+      "name": "剧毒灵草",
+      "description": "你发现了一株散发着紫黑色雾气的千年毒龙草，这是炼制高阶解毒丹的主材料，但采摘时会受到剧毒侵蚀。你想起自己的副作用逆转能力，或许这剧毒反而能成为机缘。",
+      "choices": [
+        {
+          "text": "直接吞服毒草",
+          "action": "swallow_directly"
+        },
+        {
+          "text": "小心采摘保存",
+          "action": "careful_harvest"
+        },
+        {
+          "text": "先布置隔绝阵法",
+          "action": "setup_isolation"
+        }
+      ]
+    }
+  ]
+}
